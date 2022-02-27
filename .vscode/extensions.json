@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "sohibe.java-generate-setters-getters",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-dependency",
+        "vscjava.vscode-java-test",
+        "redhat.java",
+        "naco-siren.gradle-language",
+        "vscjava.vscode-gradle",
+        "vscjava.vscode-java-pack"
+    ]
+}
