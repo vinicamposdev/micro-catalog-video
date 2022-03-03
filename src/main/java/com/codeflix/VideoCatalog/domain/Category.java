@@ -12,6 +12,12 @@ public class Category {
 	private String descriptio;
 	private Boolean isActive = true;
 
+	public Category(UUID id, String name, String description) {
+	}
+
+	public Category(String name, String descriptio) {
+	}
+
 	public UUID getId() {
 		return this.id;
 	}
