@@ -55,3 +55,6 @@ gradle-app.setting
 
 # Mac OS X
 .DS_Store
+
+# Classes and Objects directory
+bin/
