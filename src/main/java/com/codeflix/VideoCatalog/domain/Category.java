@@ -2,59 +2,68 @@ package com.codeflix.VideoCatalog.domain;
 
 import java.util.UUID;
 
-// import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
 public class Category {
-	private UUID id;
-	private String name;
-	private String descriptio;
-	private Boolean isActive = true;
+    private UUID id;
+    private String name;
+    private String description;
+    private Boolean isActive = true;
 
-	public Category(UUID id, String name, String description) {
-	}
+    public Category(UUID id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
-	public Category(String name, String descriptio) {
-	}
+    public Category(String name, String description) throws Exception {
+        this.id = UUID.randomUUID();
+        this.setName(name);
+        this.setDescription(description);
+    }
 
-	public UUID getId() {
-		return this.id;
-	}
+    public Category(String name, String description, Boolean isActive) throws Exception {
+        this.id = UUID.randomUUID();
+        this.setName(name);
+        this.setDescription(description);
+        if (isActive) this.activate(); 
+        else this.deactivate();
+    }
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
 
-	public String getName() {
-		return this.name;
-	}
+    public UUID getId() {
+        return this.id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(UUID id) {
+        this.id = id; 
+    }
 
-	public String getDescriptio() {
-		return this.descriptio;
-	}
+    public String getDescription() {
+        return this.description;
+    }
 
-	public void setDescriptio(String descriptio) {
-		this.descriptio = descriptio;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Boolean isIsActive() {
-		return this.isActive;
-	}
+    public void activate() {
+        this.isActive = true;
+    }
 
-	public Boolean getIsActive() {
-		return this.isActive;
-	}
+    public void deactivate() {
+        this.isActive = false;
+    }
 
-	public Boolean activate() {
-		return this.isActive = true;
-	}
+    public Boolean getIsActive() {
+        return this.isActive;
+    }
 
-	public Boolean deactivate() {
-		return this.isActive = false;
-	}
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) throws Exception {
+        if (name == null) throw new IllegalArgumentException("name is marked non-null but is null");
+        if (name.isEmpty()) throw new IllegalArgumentException("name is marked non-blank but is blank");
+        this.name = name;
+    } 
 }
