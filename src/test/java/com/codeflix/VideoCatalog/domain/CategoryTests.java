@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class CategoryTests {
 
 	@Test
-	@DisplayName("it should create a category with name, description and isActive set to true")
+	@DisplayName("it should ensure that a category is created with name, description and isActive set to true")
 	void createCategoryWithNameDescription() throws Exception {
 		final Category entity = new Category("any_name", "any_description");
 
@@ -26,5 +26,16 @@ class CategoryTests {
 		assertEquals(entity.getName(), "any_name");
 		assertEquals(entity.getDescription(),"any_description");
 		assertTrue((entity.getIsActive()));
+	}
+
+	@Test
+	@DisplayName("it should ensure that method deactivate returns isActive false")
+	void createCategoryAndIsDeactivateTrue() throws Exception {
+		final Category entity = new Category("any_name", "any_description");
+
+		entity.deactivate();
+
+		assertNotNull(entity);
+		assertFalse((entity.getIsActive()));
 	}
 }
