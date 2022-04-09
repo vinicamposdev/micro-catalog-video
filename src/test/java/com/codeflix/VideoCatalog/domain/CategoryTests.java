@@ -1,6 +1,12 @@
 package com.codeflix.VideoCatalog.domain;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.DisplayName;
+
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,12 +18,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 class CategoryTests {
 
 	@Test
-	void createCategoryWithName() {
-		final Category entity = new Category(
-			"any_name",
-			"any_description"
-		);
-		assertNotNull(entity);
-	}
+	@DisplayName("it should create a category with name, description and isActive set to true")
+	void createCategoryWithNameDescription() throws Exception {
+		final Category entity = new Category("any_name", "any_description");
 
+		assertNotNull(entity);
+		assertEquals(entity.getName(), "any_name");
+		assertEquals(entity.getDescription(),"any_description");
+		assertTrue((entity.getIsActive()));
+	}
 }
