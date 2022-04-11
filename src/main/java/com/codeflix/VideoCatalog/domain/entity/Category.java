@@ -1,6 +1,9 @@
-package com.codeflix.VideoCatalog.domain;
+package com.codeflix.VideoCatalog.domain.entity;
 
 import java.util.UUID;
+
+import com.codeflix.VideoCatalog.domain.exception.NotBlankException;
+import com.codeflix.VideoCatalog.domain.exception.NotNullException;
 
 public class Category {
     private UUID id;

@@ -1,4 +1,4 @@
-package com.codeflix.VideoCatalog.domain;
+package com.codeflix.VideoCatalog.domain.exception;
 
 public class DomainException extends RuntimeException {
     public DomainException() {

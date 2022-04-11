@@ -1,4 +1,4 @@
-package com.codeflix.VideoCatalog.domain;
+package com.codeflix.VideoCatalog.domain.exception;
 
 public class NotNullException extends DomainException {
     public NotNullException() {
