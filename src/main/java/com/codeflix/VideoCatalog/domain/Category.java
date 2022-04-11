@@ -14,13 +14,13 @@ public class Category {
         this.description = description;
     }
 
-    public Category(String name, String description) throws Exception {
+    public Category(String name, String description) {
         this.id = UUID.randomUUID();
         this.setName(name);
         this.setDescription(description);
     }
 
-    public Category(String name, String description, Boolean isActive) throws Exception {
+    public Category(String name, String description, Boolean isActive) {
         this.id = UUID.randomUUID();
         this.setName(name);
         this.setDescription(description);
@@ -61,13 +61,13 @@ public class Category {
         return this.name;
     }
 
-    public void setName(String name) throws Exception {
-        if (name == null) throw new IllegalArgumentException("name is marked non-null but is null");
-        if (name.isEmpty()) throw new IllegalArgumentException("name is marked non-blank but is blank");
+    public void setName(String name) {
+        if (name == null) throw new NotNullException("name is marked non-null but is null");
+        if (name.isEmpty()) throw new NotBlankException("name is marked non-blank but is blank");
         this.name = name;
     }
 
-    public void update(String name, String description, Boolean isActive) throws Exception {
+    public void update(String name, String description, Boolean isActive) {
         this.setName(name);
         this.setDescription(description);
         if (isActive != null && isActive != this.getIsActive()) {
