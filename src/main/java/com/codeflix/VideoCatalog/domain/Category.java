@@ -65,5 +65,14 @@ public class Category {
         if (name == null) throw new IllegalArgumentException("name is marked non-null but is null");
         if (name.isEmpty()) throw new IllegalArgumentException("name is marked non-blank but is blank");
         this.name = name;
-    } 
+    }
+
+    public void update(String name, String description, Boolean isActive) throws Exception {
+        this.setName(name);
+        this.setDescription(description);
+        if (isActive != null && isActive != this.getIsActive()) {
+            if (isActive == true) this.activate();
+            else this.deactivate();
+        }
+    }
 }
