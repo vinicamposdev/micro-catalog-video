@@ -38,4 +38,17 @@ class CategoryTests {
 		assertNotNull(entity);
 		assertFalse((entity.getIsActive()));
 	}
+
+	@Test
+	@DisplayName("it should ensure that method update returns updated values")
+	void createCategoryAndUpdate() throws Exception {
+		final Category entity = new Category("any_name", "any_description");
+
+		entity.update("any_name_updated", "any_description_updated", false);
+
+		assertNotNull(entity);
+		assertEquals(entity.getName(), "any_name_updated");
+		assertEquals(entity.getDescription(),"any_description_updated");
+		assertFalse((entity.getIsActive()));
+	}
 }
