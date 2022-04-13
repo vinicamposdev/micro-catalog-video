@@ -2,8 +2,9 @@ package com.codeflix.VideoCatalog.application.usecase.category.update;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import com.codeflix.VideoCatalog.domain.entity.Category;
 import com.codeflix.VideoCatalog.domain.repository.ICategoryRepository;
@@ -32,16 +33,28 @@ public class UpdateCategoryUseCaseTests {
     @Test
     @DisplayName("it should ensure category update usecase updates a category on returns")
     public void executeReturnsUpdatedCategory() {
-        Category category = new Category("any_name", "any_description");
-        
+        Category category = new Category("any_name_1", "any_description_1");
+        Category expected = new Category("any_name_2", "any_description_2");
+        Optional<Category> opCategory = Optional.of(category);
+        when(repository.findById(category.getId()))
+            .thenReturn(opCategory);
+        UpdateCategoryInputData input = new UpdateCategoryInputData();
+        input.setName(expected.getName());
+        input.setDescription(expected.getDescription());
+        input.setIsActive(expected.getIsActive());
+        category.update(
+            input.getName(), 
+            input.getDescription(), 
+            input.getIsActive()
+        );
         doNothing()
             .when(repository)
-            .remove(category.getId());
-        
-        useCase.execute(category);
-        repository.update(category);
+            .update(category);
+
+        useCase.execute(category.getId(), input);
 
         assertThat(category).isNotNull();
-        verify(repository, times(2)).update(category);
+        assertThat(expected).isNotNull();
+        assertThat(category.getName()).isEqualTo(expected.getName());
     }
 }
