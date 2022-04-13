@@ -8,6 +8,7 @@
         "naco-siren.gradle-language",
         "vscjava.vscode-gradle",
         "vscjava.vscode-java-pack",
-        "GabrielBB.vscode-lombok"
+        "gabrielbb.vscode-lombok",
+        "vivaxy.vscode-conventional-commits"
     ]
 }
