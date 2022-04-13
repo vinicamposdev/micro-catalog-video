@@ -31,8 +31,8 @@ public class FindByIdCategoryUseCaseTests {
     }
 
     @Test
-    @DisplayName("it should ensure that category usecase when given an id returns a category")
-    public void executeReturnsFindAllCategory() throws Exception {
+    @DisplayName("it should ensure FindByIdCategoryUsecase returns a category for a given id")
+    public void executeReturnsFindAllCategory() {
         Category category = new Category("any_name_1", "any_description_1");
         Optional<Category> opCategory = Optional.of(category);
         when(repository.findById(category.getId()))
