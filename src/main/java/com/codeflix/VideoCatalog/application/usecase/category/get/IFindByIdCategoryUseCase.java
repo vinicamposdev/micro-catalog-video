@@ -6,5 +6,5 @@ import com.codeflix.VideoCatalog.application.usecase.category.common.CategoryOut
 
 
 public interface IFindByIdCategoryUseCase {
-    CategoryOutputData execute(UUID id) throws Exception;
+    CategoryOutputData execute(UUID id);
 }
