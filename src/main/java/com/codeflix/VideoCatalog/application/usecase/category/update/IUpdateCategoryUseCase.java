@@ -1,7 +1,7 @@
 package com.codeflix.VideoCatalog.application.usecase.category.update;
 
-import com.codeflix.VideoCatalog.domain.entity.Category;
+import java.util.UUID;
 
 public interface IUpdateCategoryUseCase {
-    void execute(Category category);
+    void execute(UUID id, UpdateCategoryInputData input);
 }

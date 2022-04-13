@@ -1,5 +1,7 @@
 package com.codeflix.VideoCatalog.application.usecase.category.update;
 
+import java.util.UUID;
+
 import com.codeflix.VideoCatalog.domain.entity.Category;
 import com.codeflix.VideoCatalog.domain.repository.ICategoryRepository;
 
@@ -14,7 +16,14 @@ public class UpdateCategoryUseCase implements IUpdateCategoryUseCase {
     private ICategoryRepository repository;
 
     @Override
-    public void execute(Category category) {
+    public void execute(UUID id, UpdateCategoryInputData input) {
+        Category category = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Category not found"));
+        category.update(
+            input.getName(),
+            input.getDescription(),
+            input.getIsActive()
+        );
         repository.update(category);        
     }
 }
