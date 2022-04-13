@@ -5,8 +5,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.codeflix.VideoCatalog.application.usecase.category.common.CategoryOutputData;
-import com.codeflix.VideoCatalog.application.usecase.category.create.CreateCategoryInputData;
-import com.codeflix.VideoCatalog.application.usecase.category.create.CreateCategoryUseCase;
 import com.codeflix.VideoCatalog.domain.entity.Category;
 import com.codeflix.VideoCatalog.domain.repository.ICategoryRepository;
 
