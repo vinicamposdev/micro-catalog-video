@@ -9,3 +9,25 @@ services:
       - ./:/app
     working_dir: /app
     command: ./gradlew bootRun
+    networks:
+      - admin_video_catalog_network
+    depends_on:
+      - admin_video_catalog
+
+  admin_video_catalog:
+    platform: linux/x86_64
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=admin_video_catalog
+      #- MYSQL_USER=root
+      - MYSQL_PASSWORD=root       
+    security_opt:
+      - seccomp:unconfined      
+    ports:
+      - 3306:3306
+    networks:
+      - admin_video_catalog_network
+  
+networks:
+  admin_video_catalog_network:
