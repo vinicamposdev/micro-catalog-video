@@ -3,7 +3,10 @@ package com.codeflix.VideoCatalog.infrastructure.mysql;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +69,6 @@ public class MySQLCategoryRepositoryImplTests {
         assertThat(actual).hasSize(2);
     }
 
-
     @Test
     @DisplayName("it should ensure MySQLCategoryRepositoryImpl returns, when given an id, finded category")
     public void findByIdCategory() {
@@ -80,6 +82,19 @@ public class MySQLCategoryRepositoryImplTests {
 
         assertThat(actual.isPresent()).isTrue();
         assertThat(actual).isNotNull();
+    }
+
+    @Test
+    @DisplayName("it should ensure MySQLCategoryRepositoryImpl deletes, when given an id, a category")
+    public void deleteCategory() {
+        Category entity = new Category("any_name_1", "any_description_1");
+
+        doNothing()
+            .when(springDataCategoryRepository)
+            .deleteById(entity.getId());
+        repository.remove(entity.getId());
+
+        verify(springDataCategoryRepository, times(1)).deleteById(entity.getId());
     }
 }
    
