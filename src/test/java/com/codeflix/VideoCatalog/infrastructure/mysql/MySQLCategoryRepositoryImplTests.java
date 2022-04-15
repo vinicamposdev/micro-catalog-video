@@ -96,5 +96,24 @@ public class MySQLCategoryRepositoryImplTests {
 
         verify(springDataCategoryRepository, times(1)).deleteById(entity.getId());
     }
+
+    @Test
+    @DisplayName("it should ensure MySQLCategoryRepositoryImpl updates a category")
+    public void updateCategory() {
+        Category expected = new Category("any_name_1", "any_description_1");
+        Category  input = new Category("any_name_1", "any_description_1");
+        String updatedName = "any_name_2";
+        doReturn(CategoryPersistence.from(expected))
+            .when(springDataCategoryRepository)
+            .save(any(CategoryPersistence.class));
+        Category toUpdate = repository.create(input);
+        toUpdate.update(updatedName, expected.getDescription(), false);
+
+        repository.update(toUpdate);
+
+        assertThat(toUpdate).isNotNull();
+        assertThat(toUpdate).hasFieldOrPropertyWithValue("name", updatedName);
+        assertThat(toUpdate.getIsActive()).isFalse();
+    }
 }
    
