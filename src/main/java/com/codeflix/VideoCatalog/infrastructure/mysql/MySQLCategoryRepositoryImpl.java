@@ -3,6 +3,7 @@ package com.codeflix.VideoCatalog.infrastructure.mysql;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.codeflix.VideoCatalog.domain.entity.Category;
 import com.codeflix.VideoCatalog.domain.repository.ICategoryRepository;
@@ -21,8 +22,10 @@ public class MySQLCategoryRepositoryImpl implements ICategoryRepository{
 
     @Override
     public List<Category> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return repository.findAll()
+                         .parallelStream()
+                         .map(CategoryPersistence::fromThis)
+                         .collect(Collectors.toList());
     }
     
     @Override
