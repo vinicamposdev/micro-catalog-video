@@ -7,6 +7,15 @@ import com.codeflix.VideoCatalog.application.usecase.category.common.CategoryOut
 import com.codeflix.VideoCatalog.application.usecase.category.create.CreateCategoryInputData;
 import com.codeflix.VideoCatalog.application.usecase.category.update.UpdateCategoryInputData;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
@@ -17,30 +26,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/categories")
+@Api(value = "Categories")
 public interface ICategoryEndpoint {
-    @PostMapping()
+    
+    @PostMapping
     @ResponseStatus(code = CREATED)
+    @ApiOperation("Create a new category")
+    @ApiResponses(value = {
+        @ApiResponse(code = 201, message = "Created Success"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     public CategoryOutputData create(@RequestBody CreateCategoryInputData input);
 
     @GetMapping
     @ResponseStatus(code = OK)
+    @ApiOperation("Find all categories")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "List Success"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+    })
     public List<CategoryOutputData> findAll();
 
     @GetMapping("/{id}")
     @ResponseStatus(code = OK)
-    public CategoryOutputData findById(@PathVariable UUID id);
+    @ApiOperation("Find by id category")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Find Success"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+    })    
+    public CategoryOutputData findById(@PathVariable UUID id) throws Exception;
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = NO_CONTENT)
-    public void delete(@PathVariable UUID id);
+    @ApiOperation("Remove a category by id")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Removed Success"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+    })    
+    public void removeById(@PathVariable UUID id);
 
     @PutMapping("/{id}")
     @ResponseStatus(code = NO_CONTENT)
-    public void update(UUID id, @RequestBody UpdateCategoryInputData input);
+    @ApiOperation("Update a category by id")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Updated Success"),
+        @ApiResponse(code = 500, message = "Internal Server Error")
+    })    
+    public void update(@PathVariable UUID id, UpdateCategoryInputData input);
 }
