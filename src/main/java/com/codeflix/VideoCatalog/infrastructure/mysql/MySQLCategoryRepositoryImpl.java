@@ -43,8 +43,7 @@ public class MySQLCategoryRepositoryImpl implements ICategoryRepository{
 
     @Override
     public void remove(UUID id) {
-        // TODO Auto-generated method stub
-        
+        repository.deleteById(id);
     }
 
     @Override
