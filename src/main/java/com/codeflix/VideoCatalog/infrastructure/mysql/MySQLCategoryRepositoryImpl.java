@@ -48,8 +48,7 @@ public class MySQLCategoryRepositoryImpl implements ICategoryRepository{
 
     @Override
     public void update(Category category) {
-        // TODO Auto-generated method stub
-        
+        repository.save(CategoryPersistence.from(category));
     }
     
 }
