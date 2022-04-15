@@ -35,11 +35,10 @@ public class MySQLCategoryRepositoryImpl implements ICategoryRepository{
                          .fromThis();
     }
 
-
     @Override
     public Optional<Category> findById(UUID id) {
-        // TODO Auto-generated method stub
-        return null;
+        return repository.findById(id)
+                         .map(CategoryPersistence::fromThis);
     }
 
     @Override
