@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doReturn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.codeflix.VideoCatalog.domain.entity.Category;
 import com.codeflix.VideoCatalog.infrastructure.data.SpringDataCategoryRepository;
@@ -29,7 +30,7 @@ public class MySQLCategoryRepositoryImplTests {
 
     @Test
     @DisplayName("it should ensure MySQLCategoryRepositoryImpl returns created category")
-    public void executeReturnsCreatedCategory() {
+    public void createCategory() {
         Category expected = new Category("any_name", "any_description");
         Category input = new Category("any_name", "any_description");
         
@@ -48,7 +49,7 @@ public class MySQLCategoryRepositoryImplTests {
 
     @Test
     @DisplayName("it should ensure MySQLCategoryRepositoryImpl returns finded categories")
-    public void executeReturnsFindAllCategories() {
+    public void findAllCategories() {
         Category entity1 = new Category("any_name_1", "any_description_1");
         Category entiry2 = new Category("any_name_2", "any_description_2");
         List <CategoryPersistence> expected = new ArrayList<CategoryPersistence>();
@@ -63,6 +64,22 @@ public class MySQLCategoryRepositoryImplTests {
         assertThat(actual).isNotNull();
         assertThat(actual).isNotEmpty();
         assertThat(actual).hasSize(2);
+    }
+
+
+    @Test
+    @DisplayName("it should ensure MySQLCategoryRepositoryImpl returns, when given an id, finded category")
+    public void findByIdCategory() {
+        Category entity = new Category("any_name_1", "any_description_1");
+        CategoryPersistence input = CategoryPersistence.from(entity);
+
+        doReturn(Optional.of(input))
+            .when(springDataCategoryRepository)
+            .findById(entity.getId());
+        Optional<Category> actual = repository.findById(entity.getId());
+
+        assertThat(actual.isPresent()).isTrue();
+        assertThat(actual).isNotNull();
     }
 }
    
